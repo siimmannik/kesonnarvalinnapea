@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kes on Narva linnapea?</title>
+<meta name="description" content="Kontrollime igal hommikul üle, kes on parajasti Narva linnapea. Sest kunagi ei tea.">
+<meta property="og:title" content="Kes on Narva linnapea?">
+<meta property="og:description" content="Kontrollime igal hommikul üle. Sest kunagi ei tea.">
+<style>
+  :root {
+    --bg: #10141a;
+    --fg: #f2f4f8;
+    --dim: #8a94a6;
+    --accent: #ffb703;
+    --card: #1a2029;
+    --line: #2a3342;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 6vh 20px 40px;
+  }
+  .kysimus {
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--dim);
+    font-style: italic;
+    margin-bottom: 2vh;
+  }
+  .nimi {
+    font-size: clamp(48px, 12vw, 140px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 2vh 0 1vh;
+  }
+  .kommentaar {
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--accent);
+    margin-bottom: 5vh;
+  }
+  .kaardid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    max-width: 900px;
+    margin-bottom: 5vh;
+  }
+  .kaart {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    min-width: 180px;
+  }
+  .kaart .nr { font-size: 34px; font-weight: 700; color: var(--accent); }
+  .kaart .selgitus { font-size: 14px; color: var(--dim); margin-top: 6px; }
+  .rekord {
+    max-width: 640px;
+    width: 100%;
+    margin-bottom: 6vh;
+  }
+  .rekord .silt { font-size: 14px; color: var(--dim); margin-bottom: 8px; }
+  .riba {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    height: 18px;
+    overflow: hidden;
+  }
+  .riba > div {
+    background: var(--accent);
+    height: 100%;
+    border-radius: 99px;
+    transition: width 1s ease;
+    min-width: 4px;
+  }
+  h2 {
+    font-size: 20px;
+    color: var(--dim);
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .hooajad {
+    max-width: 640px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 6vh;
+  }
+  .hooaeg {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 6px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+  }
+  .hooaeg .kes { font-weight: 700; }
+  .hooaeg .millal { color: var(--dim); font-size: 14px; white-space: nowrap; }
+  .hooaeg.aktiivne .kes::after {
+    content: " — käimas";
+    color: var(--accent);
+    font-weight: 400;
+    font-style: italic;
+  }
+  footer {
+    margin-top: auto;
+    color: var(--dim);
+    font-size: 13px;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+  footer a { color: var(--dim); }
+  .kontroll { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+  <div class="kysimus">Sa küsisid. Me kontrollisime. Täna hommikul on Narva linnapea…</div>
+  <div class="nimi" id="nimi">…</div>
+  <div class="kommentaar" id="kommentaar"></div>
+
+  <div class="kaardid">
+    <div class="kaart">
+      <div class="nr" id="paevi">–</div>
+      <div class="selgitus">päeva praeguses ametis</div>
+    </div>
+    <div class="kaart">
+      <div class="nr" id="ametiaegu">–</div>
+      <div class="selgitus">linnapea ametiaega alates 2019</div>
+    </div>
+    <div class="kaart">
+      <div class="nr" id="keskmine">–</div>
+      <div class="selgitus">päeva kestab ametiaeg keskmiselt</div>
+    </div>
+  </div>
+
+  <div class="rekord">
+    <div class="silt" id="rekordisilt">Kaugus isiklikust rekordist</div>
+    <div class="riba"><div id="rekordiriba" style="width:0%"></div></div>
+  </div>
+
+  <h2>Eelmised hooajad</h2>
+  <div class="hooajad" id="hooajad"></div>
+
+  <footer>
+    <div class="kontroll" id="kontroll">Viimati kontrollitud: …</div>
+    <div>Robot käib igal hommikul narva.ee lehel vaatamas. Kui vahepeal on toimunud
+    umbusaldushääletus, palume mõistvat suhtumist — meil on ainult üks robot,
+    Narval on 31 volikogu liiget.</div>
+    <div>Allikad: <a href="https://www.narva.ee/kontakt">narva.ee</a> ·
+    <a href="https://et.wikipedia.org/wiki/Narva_linnapea">Vikipeedia</a> ·
+    <a href="https://github.com/siimmannik/kesonnarvalinnapea">GitHub</a></div>
+  </footer>
+
+<script>
+const KUUD = ["jaanuar","veebruar","märts","aprill","mai","juuni","juuli","august","september","oktoober","november","detsember"];
+
+function paevad(a, b) {
+  return Math.max(0, Math.round((b - a) / 86400000));
+}
+function kp(iso) {
+  if (!iso) return null;
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+function kpTekst(iso) {
+  const d = kp(iso);
+  return d.getDate() + ". " + KUUD[d.getMonth()] + " " + d.getFullYear();
+}
+
+fetch("data.json?" + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    const nyyd = new Date();
+    const alates = kp(d.praegune.alates);
+    const ametis = paevad(alates, nyyd);
+
+    document.getElementById("nimi").textContent = d.praegune.nimi;
+    document.title = "Kes on Narva linnapea? " + d.praegune.nimi + ".";
+
+    // Kommentaar sõltuvalt sellest, kui kaua seis on püsinud
+    let k;
+    if (ametis < 7)        k = "Vähemalt oli seda täna hommikul.";
+    else if (ametis < 30)  k = "Jah, ikka veel tema.";
+    else if (ametis < 100) k = "Narva mõistes üllatavalt stabiilne periood.";
+    else if (ametis < 365) k = "Hakkab juba harjumuseks saama.";
+    else                   k = "See on Narva mõistes juba igavik.";
+    document.getElementById("kommentaar").textContent = k;
+
+    document.getElementById("paevi").textContent = ametis;
+
+    // Ajaloo statistika
+    const lopetatud = d.ajalugu.filter(t => t.kuni);
+    const kestused = lopetatud.map(t => paevad(kp(t.alates), kp(t.kuni)));
+    const keskmine = Math.round(kestused.reduce((a, b) => a + b, 0) / kestused.length);
+    document.getElementById("ametiaegu").textContent = d.ajalugu.length;
+    document.getElementById("keskmine").textContent = keskmine;
+
+    // Sama inimese isiklik rekord vs praegune ametiaeg
+    const omad = lopetatud.filter(t => t.nimi === d.praegune.nimi)
+                          .map(t => paevad(kp(t.alates), kp(t.kuni)));
+    const rekord = omad.length ? Math.max(...omad) : keskmine;
+    const osa = Math.min(100, Math.round(ametis / rekord * 100));
+    document.getElementById("rekordiriba").style.width = osa + "%";
+    document.getElementById("rekordisilt").textContent =
+      omad.length
+        ? d.praegune.nimi.split(" ").pop() + "i isiklik rekord on " + rekord +
+          " päeva. Praegu täidetud " + osa + "%."
+        : "Keskmine ametiaeg on " + keskmine + " päeva. Praegu täidetud " + osa + "%.";
+
+    // Hooajad
+    const h = document.getElementById("hooajad");
+    d.ajalugu.forEach((t, i) => {
+      const rida = document.createElement("div");
+      rida.className = "hooaeg" + (t.kuni ? "" : " aktiivne");
+      const nr = d.ajalugu.length - i;
+      const kestus = t.kuni ? paevad(kp(t.alates), kp(t.kuni)) + " päeva" : ametis + " päeva";
+      rida.innerHTML =
+        '<span class="kes">' + nr + '. hooaeg: ' + t.nimi + '</span>' +
+        '<span class="millal">' + kpTekst(t.alates) + ' – ' +
+        (t.kuni ? kpTekst(t.kuni) : '…') + ' (' + kestus + ')</span>';
+      h.appendChild(rida);
+    });
+
+    // Viimane kontroll
+    const vk = new Date(d.viimati_kontrollitud);
+    let kontroll = "Viimati kontrollitud: " + vk.getDate() + ". " +
+      KUUD[vk.getMonth()] + " " + vk.getFullYear() + ".";
+    if (d.kontrolli_status !== "ok") {
+      kontroll += " (Viimane kontroll ebaõnnestus — täpselt nagu mõni Narva volikogu istung.)";
+    }
+    document.getElementById("kontroll").textContent = kontroll;
+  })
+  .catch(() => {
+    document.getElementById("nimi").textContent = "Seda ei tea praegu keegi";
+    document.getElementById("kommentaar").textContent = "Andmete laadimine ebaõnnestus. Sümboolne.";
+  });
+</script>
+</body>
+</html>
