@@ -1,0 +1,24 @@
+name: Hommikune kontroll
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # kell 8 Eesti suveajal, 7 talveajal
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  kontroll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Kontrolli, kes on Narva linnapea
+        run: python3 kontroll.py
+      - name: Salvesta tulemus
+        run: |
+          git config user.name "narva-robot"
+          git config user.email "actions@github.com"
+          git add data.json
+          git diff --cached --quiet || git commit -m "Hommikune kontroll $(date +%F)"
+          git push
