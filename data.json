@@ -4,15 +4,43 @@
     "alates": "2026-07-26",
     "allikas": "https://www.err.ee/1610086786/narva-volikogu-umbusaldas-raiki-uus-linnapea-on-jaan-toots"
   },
-  "viimati_kontrollitud": "2026-08-03T00:00:00+03:00",
+  "viimati_kontrollitud": "2026-08-03T11:24:59+03:00",
   "kontrolli_status": "ok",
   "ajalugu": [
-    { "nimi": "Jaan Toots", "alates": "2026-07-26", "kuni": null },
-    { "nimi": "Katri Raik", "alates": "2024-12-28", "kuni": "2026-07-26" },
-    { "nimi": "Jaan Toots", "alates": "2023-10-05", "kuni": "2024-12-28" },
-    { "nimi": "Katri Raik", "alates": "2021-12-16", "kuni": "2023-09-16" },
-    { "nimi": "Ants Liimets", "alates": "2021-08-26", "kuni": "2021-12-16" },
-    { "nimi": "Katri Raik", "alates": "2020-12-30", "kuni": "2021-08-16" },
-    { "nimi": "Aleksei Jevgrafov", "alates": "2019-04-08", "kuni": "2020-11-11" }
+    {
+      "nimi": "Jaan Toots",
+      "alates": "2026-07-26",
+      "kuni": null
+    },
+    {
+      "nimi": "Katri Raik",
+      "alates": "2024-12-28",
+      "kuni": "2026-07-26"
+    },
+    {
+      "nimi": "Jaan Toots",
+      "alates": "2023-10-05",
+      "kuni": "2024-12-28"
+    },
+    {
+      "nimi": "Katri Raik",
+      "alates": "2021-12-16",
+      "kuni": "2023-09-16"
+    },
+    {
+      "nimi": "Ants Liimets",
+      "alates": "2021-08-26",
+      "kuni": "2021-12-16"
+    },
+    {
+      "nimi": "Katri Raik",
+      "alates": "2020-12-30",
+      "kuni": "2021-08-16"
+    },
+    {
+      "nimi": "Aleksei Jevgrafov",
+      "alates": "2019-04-08",
+      "kuni": "2020-11-11"
+    }
   ]
 }
